@@ -249,7 +249,7 @@ export default function Home() {
           count follows deterministic math:
         </p>
         <p style={{ fontFamily: "monospace", fontSize: 14 }}>
-          verified = claimed − upheld challenges, floored at zero
+          verified = claimed − upheld verified deductions, floored at zero
         </p>
         <p style={{ marginBottom: 0 }}>
           No LLM ever touches the credit math. The model only decides whether
@@ -263,7 +263,7 @@ export default function Home() {
       <p style={{ color: "#9aa4b8", fontSize: 14 }}>
         Everything below is read from the deployed contract on every load. No
         wallet is needed. The verified cases are the contract&apos;s own
-        state: 2 projects, 6 challenges.
+        state: 3 projects, 8 challenges.
       </p>
 
       <h3>Projects ({projects.length})</h3>
@@ -356,6 +356,8 @@ export default function Home() {
             {c.statement}
             <br />
             credits affected: {Number(c.credits_affected).toLocaleString()} ·
+            verified affected:{" "}
+            {Number(c.verified_credits_affected ?? 0).toLocaleString()} ·
             claimed severity: {c.claimed_severity} · challenger:{" "}
             {shortAddr(c.challenger)}
             {c.triage_summary ? (
@@ -523,13 +525,33 @@ export default function Home() {
               news_article.md
             </a>
           </li>
+          <li>
+            Partial-overlap registry (Kelp, CM-2024-205, overlap 400):{" "}
+            <a href={`${FIXTURE_BASE}registry_partial.md`} style={linkStyle}>
+              registry_partial.md
+            </a>
+          </li>
+          <li>
+            Partial-overlap second entry (CM-2023-091):{" "}
+            <a href={`${FIXTURE_BASE}double_count_partial.md`} style={linkStyle}>
+              double_count_partial.md
+            </a>
+          </li>
+          <li>
+            Partial-overlap monitoring report (Kelp):{" "}
+            <a href={`${FIXTURE_BASE}monitoring_report_partial.md`} style={linkStyle}>
+              monitoring_report_partial.md
+            </a>
+          </li>
         </ul>
         <p style={{ color: "#9aa4b8", fontSize: 13, marginBottom: 0 }}>
-          Verified on-chain state, read back 2026-11-18: 2 projects, 6
+          Verified on-chain state, read back 2026-11-21: 3 projects, 8
           challenges. Project 0 claimed 10,000, verified 9,000 (challenge 0
           valid/critical, 1,000 double-counted credits). Project 1 claimed
-          5,000, verified 5,000 (dead registry, not silently docked).
-          Challenges 1–5 invalid, severity none.
+          5,000, verified 5,000 (dead registry, not silently docked). Project
+          2 claimed 2,000, verified 1,600 (challenge 6 claimed 1,000
+          double-counted but the registry proved only 400, so only 400 were
+          deducted). Challenges 1–5 and 7 invalid, severity none.
         </p>
       </div>
     </main>
