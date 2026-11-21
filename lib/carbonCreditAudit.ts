@@ -23,6 +23,7 @@ export interface Challenge {
   title: string;
   statement: string;
   credits_affected: number | string;
+  verified_credits_affected: number | string;
   evidence_url: string;
   claimed_severity: string;
   status: string;
@@ -33,7 +34,7 @@ export interface Challenge {
 }
 
 const CONTRACT_ADDRESS = (process.env.NEXT_PUBLIC_CONTRACT_ADDRESS ||
-  "0xa726dD7561504C142355434601333c49D8643e8F") as `0x${string}`;
+  "0x44C6fE01e66B38157a2C5f970dA2220e9da5aD95") as `0x${string}`;
 const STUDIO_URL =
   process.env.NEXT_PUBLIC_GENLAYER_RPC_URL || "https://studio.genlayer.com/api";
 
